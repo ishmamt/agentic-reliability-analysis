@@ -11,7 +11,7 @@
 > it completes?*
 >
 > Modeled loosely on [jun-zeng/Audit-log-analysis](https://github.com/jun-zeng/Audit-log-analysis).
-> Started: July 2026. Maintainer: [you].
+> Started: July 2026. Maintainer: Ishmam.
 
 ## How this repo is organized
 
@@ -225,9 +225,8 @@ polished, PR-facing version of a subset of that work.
 
 ## Related existing curated lists (don't duplicate, cross-reference instead)
 - [VoltAgent/awesome-ai-agent-papers](https://github.com/VoltAgent/awesome-ai-agent-papers) — broad 2026 agent paper tracker, not internal-signal-focused but good raw feed.
-- [jun-zeng/Audit-log-analysis](https://github.com/jun-zeng/Audit-log-analysis) — structural template for this repo.
 
-## Contributing (to yourself, later)
+## Contributing
 When you add a paper: fill in `papers.csv` first (structured), then promote well-understood
 entries into this README with the gap/limitation written in your own words — that act of writing
 the gap is where your literature review argument actually gets built.
