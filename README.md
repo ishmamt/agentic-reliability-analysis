@@ -1,34 +1,33 @@
-# Internal Reliability Signals for Agentic Systems
+# Internal Signals for Realiable Agentic Systems
 
-Most existing work on agent reliability focuses on *external* guardrails — filters, sandboxes,
-policy engines that watch an agent from the outside. This is a map of work on the other half:
+Most existing work on agent reliability focuses on *external* guardrails such as filters, sandboxes,
+policy engines etc. that watch an agent from the outside. This is a map of work on the other half:
 **internal, model-native signals** (uncertainty, activation-level state, self-consistency) that
 might catch a failing trajectory before it completes — with a focus on coding, web, and GUI
 agents specifically.
 
 Modeled on [jun-zeng/Audit-log-analysis](https://github.com/jun-zeng/Audit-log-analysis).
 
-New finds go into [`papers.csv`](papers.csv) first — plain title, authors, venue, year, idea, gap,
-category, relevant (yes/no/tbd) — no links (that's what the README is for). Once read and
-settled, a paper gets promoted into the relevant section below, where its title becomes the
-clickable link.
+```
+New finds go into [`papers.csv`](papers.csv) first. Once read and settled, a paper gets promoted into the relevant section 
+below.
+```
 
-- [Table of contents](#table-of-contents)
-  * [Datasets & Benchmarks](#datasets--benchmarks)
-  * [Surveys](#surveys)
-  * [Coding Agents](#coding-agents)
-  * [Web Agents](#web-agents)
-  * [GUI Agents](#gui-agents)
-  * [Cross-Domain Trajectory Monitoring](#cross-domain-trajectory-monitoring)
-  * [Internal Signals: Uncertainty, Probing, Introspection](#internal-signals-uncertainty-probing-introspection)
-  * [Alignment (Anthropic Alignment Science)](#alignment-anthropic-alignment-science)
-  * [Context: External Guardrails](#context-external-guardrails)
-  * [Related Lists](#related-lists)
+- [Internal Signals for Realiable Agentic Systems](#internal-signals-for-realiable-agentic-systems)
+  - [Datasets \& Benchmarks](#datasets--benchmarks)
+  - [Surveys](#surveys)
+  - [Coding Agents](#coding-agents)
+  - [Web Agents](#web-agents)
+  - [GUI Agents](#gui-agents)
+  - [Cross-Domain Trajectory Monitoring](#cross-domain-trajectory-monitoring)
+  - [Internal Signals: Uncertainty, Probing, Introspection](#internal-signals-uncertainty-probing-introspection)
+  - [Alignment (Anthropic Alignment Science)](#alignment-anthropic-alignment-science)
+  - [Context: External Guardrails](#context-external-guardrails)
+  - [Related Lists](#related-lists)
 
 ## Datasets & Benchmarks
 
-Standard task environments used across this literature — useful for knowing what "success/failure"
-means in each domain, and where to eventually test any detector you build.
+Standard task environments used across this literature.
 
 * [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://arxiv.org/abs/2310.06770) — Jimenez, Yang, Wettig, Yao, Pei, Press, Narasimhan. ICLR'2024. 500 human-verified tasks (2,294 in the full set) from real GitHub issues across 12 Python repos; agent must produce a passing patch.
 * [WebArena: A Realistic Web Environment for Building Autonomous Agents](https://arxiv.org/abs/2307.13854) — Zhou, Xu, Zhu, Zhou, Lo, Sridhar, Cheng, Ou, Bisk, Fried, Alon, Neubig. ICLR'2024. 812 web-navigation tasks across maps, e-commerce, forums, dev tools.
@@ -39,17 +38,16 @@ means in each domain, and where to eventually test any detector you build.
 * [τ²-Bench: Evaluating Conversational Agents in a Dual-Control Environment](https://arxiv.org/abs/2506.07982) — Barres, Dong, Ray, Si, Narasimhan. arXiv'2025. Successor to τ-bench.
 * [Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces](https://arxiv.org/html/2601.11868v1) — arXiv'2026. Command-line/terminal agent tasks.
 
-**Important caveat, worth knowing before you cite any leaderboard number**: a 2026 study
-found all eight major agent benchmarks above could be reward-hacked to near-100% without
-solving the underlying tasks (e.g. reading WebArena's gold answer directly from the eval
-harness, or exploiting `eval()` calls in the grading pipeline).
+**Important caveat**: a 2026 study found all eight major agent benchmarks above could be reward-hacked to near-100% without
+solving the underlying tasks (e.g. reading WebArena's gold answer directly from the eval harness, or exploiting `eval()` calls 
+in the grading pipeline).
 * [How We Broke Top AI Agent Benchmarks](https://arxiv.org/abs/2605.12673) — 2026. Gap/relevance to you: benchmark gaming is itself a trajectory-level failure mode an internal-signal detector might catch that an external pass/fail check would miss.
 
 ## Surveys
 
-* [A Survey for LLM Agent Trajectory Analysis: From Failure Attribution to Enhancement](https://arxiv.org/html/2606.06324v2) — Wang, Wang, Chen, Xie, Chen, Mu, Liu, Wang. arXiv'2026. Surveys 42 papers (from 1,452 screened) organizing trajectory analysis into failure attribution, debugging, repair, optimization, monitoring, benchmarks. Gap: read this first — defines the existing map of the exact space you're entering.
+* [A Survey for LLM Agent Trajectory Analysis: From Failure Attribution to Enhancement](https://arxiv.org/html/2606.06324v2) — Wang, Wang, Chen, Xie, Chen, Mu, Liu, Wang. arXiv'2026. Surveys 42 papers (from 1,452 screened) organizing trajectory analysis into failure attribution, debugging, repair, optimization, monitoring, benchmarks.
 * [A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions](https://arxiv.org/abs/2311.05232) — Huang, Yu, Ma, Zhong, Feng, Wang, Chen, Peng, Feng, Qin, et al. ACM TOIS'2025.
-* Safeguarding Large Language Models: A Survey — Dong, Mu, Zhang, Sun, Zhang, Wu, Jin, Qi, Hu, Meng, et al. Artificial Intelligence Review'2025. *(no arXiv/free link found yet — journal-only)*
+* [Safeguarding Large Language Models: A Survey](https://arxiv.org/pdf/2406.02622) — Dong, Mu, Zhang, Sun, Zhang, Wu, Jin, Qi, Hu, Meng, et al. Artificial Intelligence Review'2025.
 
 ## Coding Agents
 
@@ -81,6 +79,7 @@ harness, or exploiting `eval()` calls in the grading pipeline).
 * [Trajectory Guard: A Lightweight, Sequence-Aware Model for Real-Time Anomaly Detection in Agentic AI](https://arxiv.org/abs/2601.00516) — Advani. arXiv'2026. Siamese Recurrent Autoencoder with hybrid contrastive-reconstruction loss; F1 0.88-0.94 on balanced sets. Gap: performance degrades on long trajectories (F1 0.96 for 2-5 steps vs. 0.87 for 11+ steps) — a GRU encoding bottleneck, relevant if your trajectories run long.
 * [Agentic Confidence Calibration](https://arxiv.org/abs/2601.15778) — arXiv'2026 (desk-rejected from ICLR'2026, posted independently). Introduces Holistic Trajectory Calibration (HTC): extracts process-level features (early-step entropy, confidence gradients, stability dynamics) across a full trajectory. Directly relevant: this already uses internal/logit-derived features, not just external ones — read closely for overlap with your angle.
 * [When Agents Fail: A Comprehensive Study of Bugs in LLM Agents with Automated Labeling](https://arxiv.org/abs/2601.15232) — Islam, Ayon, Thomas, Ahmed, Wardat. arXiv'2026. Analyzes 1,187 bug reports across 7 LLM agent frameworks from Stack Overflow/GitHub/HuggingFace forums.
+* [HarnesFix](https://arxiv.org/pdf/2606.06324v2) — Chen, Wang, Liu, Wang, Zheng, Wang. arXiv'2026. Attributes failures to specific harness layers (a 7-layer taxonomy). Gap: post-hoc, text/trace-based diagnosis by an external LLM judge, not real-time or internal-state-based
 
 ## Internal Signals: Uncertainty, Probing, Introspection
 
